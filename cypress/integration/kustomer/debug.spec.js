@@ -16,6 +16,7 @@ describe('Debug Spec', function () {
     cy.visit('https://login.yahoo.com/account/create');
     cy.get('#reg-submit-button').click();
     //cy.pause(3000);
+    // Use Invoke to access the text. Then search for non breaking spaces and replace them with spaces.
     cy.get("#reg-error-password").invoke('text').then((text) => {
       expect(text.replace(/\u00a0/g, ' ')).equal('This is required.');
     });
