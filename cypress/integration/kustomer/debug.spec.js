@@ -9,13 +9,15 @@
  * 7.  Feel free to ask the internet for help.
  * 8.  The Cypress docs are also a good resource: https://docs.cypress.io
  * 9.  You can uncomment cy.pause() to poke around before it fails.
-*/
+ */
 
-describe('Debug Spec', function() {
-  it('should verify password is required', function() {
+describe('Debug Spec', function () {
+  it('should verify password is required', function () {
     cy.visit('https://login.yahoo.com/account/create');
     cy.get('#reg-submit-button').click();
-    // cy.pause();
-    cy.get('#reg-error-password').should('have.text', 'This is required.');
+    //cy.pause(3000);
+    cy.get("#reg-error-password").invoke('text').then((text) => {
+      expect(text.replace(/\u00a0/g, ' ')).equal('This is required.');
+    });
   });
 });
